@@ -1,5 +1,8 @@
 {
   "name": "github-trending",
+  "scripts": {
+    "format": "prettier . --write"
+  },
   "devDependencies": {
     "@yutengjing/prettier-config": "^1.0.0"
   }

@@ -1,14 +1,14 @@
-import { createHTTPServer } from "@trpc/server/adapters/standalone";
-import cors from "cors";
+import { createHTTPServer } from '@trpc/server/adapters/standalone';
+import cors from 'cors';
 import {
   fetchGithubTrending,
   type Options as FetchGithubTrendingOptions,
   type ProgramLanguage,
   type SpokenLanguage,
-} from "fetch-github-trending";
-import { z } from "zod";
+} from 'fetch-github-trending';
+import { z } from 'zod';
 
-import { publicProcedure, router } from "./trpc";
+import { publicProcedure, router } from './trpc';
 
 const appRouter = router({
   githubTrending: publicProcedure
@@ -16,9 +16,7 @@ const appRouter = router({
       z
         .object({
           spokenLanguage: z.string().optional(),
-          programLanguage: z
-            .union([z.string(), z.array(z.string())])
-            .optional(),
+          programLanguage: z.union([z.string(), z.array(z.string())]).optional(),
           dateRange: z.string().optional(),
         })
         .optional(),
@@ -27,9 +25,7 @@ const appRouter = router({
       return fetchGithubTrending({
         spokenLanguage: input?.spokenLanguage as SpokenLanguage | undefined,
         programLanguage: input?.programLanguage as ProgramLanguage | undefined,
-        dateRange: input?.dateRange as
-          | FetchGithubTrendingOptions["dateRange"]
-          | undefined,
+        dateRange: input?.dateRange as FetchGithubTrendingOptions['dateRange'] | undefined,
       });
     }),
 });

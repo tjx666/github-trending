@@ -1,5 +1,5 @@
-import { createTRPCProxyClient, httpBatchLink } from "@trpc/client";
-import type { AppRouter } from "../../server/src/index";
+import { createTRPCProxyClient, httpBatchLink } from '@trpc/client';
+import type { AppRouter } from '../../server/src/index';
 
 //     👆 **type-only** import
 // Pass AppRouter as generic here. 👇 This lets the `trpc` object know
@@ -7,7 +7,7 @@ import type { AppRouter } from "../../server/src/index";
 export const trpc = createTRPCProxyClient<AppRouter>({
   links: [
     httpBatchLink({
-      url: "http://localhost:8000",
+      url: 'http://localhost:8000',
     }),
   ],
 });

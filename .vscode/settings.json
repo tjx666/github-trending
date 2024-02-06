@@ -1,3 +1,5 @@
 {
-  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"]
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+  "css.validate": false,
+  "tailwindCSS.experimental.classRegex": [["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]]
 }

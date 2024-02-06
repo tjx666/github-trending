@@ -1,5 +1,7 @@
+const config = require('@yutengjing/prettier-config');
 /** @type {import('prettier').Config} */
 module.exports = {
-  ...require('@yutengjing/prettier-config'),
+  ...config,
   tabWidth: 2,
+  plugins: [...config.plugins, 'prettier-plugin-tailwindcss'],
 };

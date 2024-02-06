@@ -1,14 +1,22 @@
 import { createHTTPServer } from '@trpc/server/adapters/standalone';
 import cors from 'cors';
+import ExpiryMap from 'expiry-map';
 import {
-  fetchGithubTrending,
+  fetchGithubTrending as _fetchGithubTrending,
   type Options as FetchGithubTrendingOptions,
   type ProgramLanguage,
   type SpokenLanguage,
 } from 'fetch-github-trending';
+import pMemoize from 'p-memoize';
 import { z } from 'zod';
 
 import { publicProcedure, router } from './trpc';
+
+const cache = new ExpiryMap(1000 * 60 * 5);
+const fetchGithubTrending = pMemoize(_fetchGithubTrending, {
+  cache,
+  cacheKey: (args) => JSON.stringify(args),
+});
 
 const appRouter = router({
   githubTrending: publicProcedure
@@ -31,7 +39,9 @@ const appRouter = router({
 });
 
 const server = createHTTPServer({
-  middleware: cors(),
+  middleware: cors({
+    maxAge: 60 * 5,
+  }),
   router: appRouter,
 });
 

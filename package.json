@@ -4,6 +4,7 @@
     "format": "prettier . --write"
   },
   "devDependencies": {
-    "@yutengjing/prettier-config": "^1.0.0"
+    "@yutengjing/prettier-config": "^1.0.0",
+    "prettier-plugin-tailwindcss": "^0.5.11"
   }
 }
